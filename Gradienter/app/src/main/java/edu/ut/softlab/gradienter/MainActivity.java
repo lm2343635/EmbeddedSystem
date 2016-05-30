@@ -6,12 +6,27 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
-    private final static int MAX_ANGLE=30;
+    private int maxAngle=30;
 
     private GradienterView gradienterView;
     private SensorManager sensorManager;
+
+    private TextView yAngleTextView;
+    private TextView zAngleTextView;
+    private TextView angleView;
+
+    private EditText maxAngleEditText;
+    private Button maxAngleButton;
+
+    private DecimalFormat decimalFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +34,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_main);
         gradienterView=(GradienterView)findViewById(R.id.gradienter_view);
         sensorManager=(SensorManager)getSystemService(SENSOR_SERVICE);
+        yAngleTextView=(TextView)findViewById(R.id.yAngleTextView);
+        zAngleTextView=(TextView)findViewById(R.id.zAngleTextView);
+        angleView=(TextView)findViewById(R.id.angleTextView);
+        decimalFormat=new DecimalFormat("#.00");
+
+        maxAngleEditText=(EditText)findViewById(R.id.maxAngleEditText);
+        maxAngleEditText.setText(String.valueOf(maxAngle));
+        maxAngleButton=(Button)findViewById(R.id.maxAngleButton);
+        maxAngleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                maxAngle=Integer.parseInt(maxAngleEditText.getText().toString());
+            }
+        });
     }
 
     @Override
@@ -46,18 +75,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             case Sensor.TYPE_ORIENTATION:
                 float yAngle=values[1];
                 float zAngle=values[2];
+                double angle=Math.sqrt(yAngle*yAngle+zAngle*zAngle);
                 int x=(gradienterView.backgroud.getWidth()-gradienterView.bubble.getWidth())/2;
                 int y=(gradienterView.backgroud.getHeight()-gradienterView.bubble.getHeight())/2;
-                if(Math.abs(zAngle)<=MAX_ANGLE) {
-                    x+=(int)((gradienterView.backgroud.getWidth()-gradienterView.bubble.getWidth())/2*zAngle/MAX_ANGLE);
-                } else if(zAngle>MAX_ANGLE) {
+                yAngleTextView.setText(decimalFormat.format(yAngle)+"˚");
+                zAngleTextView.setText(decimalFormat.format(zAngle)+"˚");
+                angleView.setText(decimalFormat.format(angle)+"˚");
+                if(Math.abs(zAngle)<=maxAngle) {
+                    x+=(int)((gradienterView.backgroud.getWidth()-gradienterView.bubble.getWidth())/2*zAngle/maxAngle);
+                } else if(zAngle>maxAngle) {
                     x=0;
                 } else {
                     x=gradienterView.backgroud.getWidth()-gradienterView.bubble.getWidth();
                 }
-                if(Math.abs(yAngle)<+MAX_ANGLE) {
-                    y+=(int)((gradienterView.backgroud.getHeight()-gradienterView.bubble.getHeight())/2*yAngle/MAX_ANGLE);
-                } else if(yAngle>MAX_ANGLE) {
+                if(Math.abs(yAngle)<+maxAngle) {
+                    y+=(int)((gradienterView.backgroud.getHeight()-gradienterView.bubble.getHeight())/2*yAngle/maxAngle);
+                } else if(yAngle>maxAngle) {
                     y=gradienterView.backgroud.getHeight()-gradienterView.bubble.getHeight();
                 } else {
                     y=0;
@@ -67,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     gradienterView.setBubbleY(y);
                 }
                 gradienterView.postInvalidate();
+                break;
+            default:
                 break;
         }
     }

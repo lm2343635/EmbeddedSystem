@@ -8,5 +8,86 @@
     <edu.ut.softlab.gradienter.GradienterView
         android:id="@+id/gradienter_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Angle= "
+        android:id="@+id/textView2"
+        android:layout_marginLeft="47dp"
+        android:layout_alignBaseline="@+id/angleTextView"
+        android:layout_alignBottom="@+id/angleTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="97dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="value"
+        android:id="@+id/angleTextView"
+        android:layout_marginBottom="27dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="yAngle= "
+        android:id="@+id/textView"
+        android:layout_marginLeft="47dp"
+        android:layout_above="@+id/textView2"
+        android:layout_toStartOf="@+id/yAngleTextView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="value"
+        android:id="@+id/yAngleTextView"
+        android:layout_alignTop="@+id/textView"
+        android:layout_toEndOf="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="zAngle= "
+        android:id="@+id/textView3"
+        android:layout_marginLeft="47dp"
+        android:layout_above="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="value"
+        android:id="@+id/zAngleTextView"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_alignEnd="@+id/yAngleTextView" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/maxAngleEditText"
+        android:layout_above="@+id/textView3"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Max Angle"
+        android:id="@+id/maxAngleButton"
+        android:layout_alignBottom="@+id/maxAngleEditText"
+        android:layout_toEndOf="@+id/maxAngleEditText" />
+
 </RelativeLayout>

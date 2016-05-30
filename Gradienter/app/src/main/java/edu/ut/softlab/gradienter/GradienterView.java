@@ -44,7 +44,8 @@ public class GradienterView extends View {
         drawBackground(width, canvas);
         drawLine(width, canvas);
 
-        bubble= BitmapFactory.decodeResource(getResources(), R.drawable.bubble);
+        bubble=Bitmap.createBitmap(40, 40, Bitmap.Config.ARGB_8888);
+        drawBubble(new Canvas(bubble));
     }
 
     private void drawBackground(int width, Canvas canvas) {
@@ -62,6 +63,14 @@ public class GradienterView extends View {
         paint.setColor(Color.WHITE);
         canvas.drawLine(0, width/2, width, width/2, paint);
         canvas.drawLine(width/2, 0, width/2, width, paint);
+    }
+
+    private void drawBubble(Canvas canvas) {
+        Paint paint=new Paint();
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.WHITE);
+        canvas.drawCircle(20, 20, 20, paint);
     }
 
     @Override
