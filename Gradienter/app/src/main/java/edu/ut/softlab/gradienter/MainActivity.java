@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 } else {
                     x=gradienterView.backgroud.getWidth()-gradienterView.bubble.getWidth();
                 }
-                if(Math.abs(yAngle)<+maxAngle) {
+                if(Math.abs(yAngle)<=maxAngle) {
                     y+=(int)((gradienterView.backgroud.getHeight()-gradienterView.bubble.getHeight())/2*yAngle/maxAngle);
                 } else if(yAngle>maxAngle) {
                     y=gradienterView.backgroud.getHeight()-gradienterView.bubble.getHeight();
