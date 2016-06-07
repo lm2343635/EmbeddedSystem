@@ -11,7 +11,7 @@ int main(int argc, char const *argv[]) {
 		return -1;
 	}
 
-	int sw_num=atoi(argv[0]);
+	int sw_num=atoi(argv[1]);
 	int sw_val;
 
 	if(sw_num>1) {
