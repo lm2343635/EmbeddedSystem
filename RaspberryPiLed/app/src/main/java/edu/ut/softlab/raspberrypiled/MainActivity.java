@@ -35,7 +35,28 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
-            
+            case R.id.toggle_button_led_1:
+                mLedNumber=LED1;
+                break;
+
+            case R.id.toggle_button_led_2:
+                mLedNumber=LED2;
+                break;
+
+            case R.id.toggle_button_led_3:
+                mLedNumber=LED3;
+                break;
+
+            case R.id.toggle_button_led_4:
+                mLedNumber=LED4;
+                break;
+
+            case R.id.toggle_button_led_5:
+                mLedNumber=LED5;
+                break;
+
         }
+        HttpGetTask task=new HttpGetTask(this);
+        task.execute(mLedNumber, isChecked? 1: 0);
     }
 }

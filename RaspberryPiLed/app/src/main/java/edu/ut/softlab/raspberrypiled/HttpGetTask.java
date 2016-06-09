@@ -33,7 +33,7 @@ public class HttpGetTask extends AsyncTask<Integer, Void, Void> {
 
     @Override
     protected Void doInBackground(Integer... params) {
-        mUri=DEFAULT_URL+"num="+params[0].toString()+"&stat="+params[1].toString();
+        mUri=DEFAULT_URL+"?num="+params[0].toString()+"&stat="+params[1].toString();
         exec_get();
         return null;
     }
